@@ -1,5 +1,5 @@
 """
-Name : Round.py
+Name : GameRound.py
 Description : Base round class for Rock-Paper-Scissor
 
 """
@@ -7,7 +7,7 @@ Description : Base round class for Rock-Paper-Scissor
 
 class Round:
     """
-    Round Object that includes information about what was played, current player mood and the streak
+    Round Object that includes information about what was played and the streak
 
     """
     record = {'win':0, 'loss':0, 'tie':0}
@@ -21,7 +21,6 @@ class Round:
         self.comp = comp
         self.result = self.eval(user, comp)
         self.record[self.result] += 1
-
 
     def __repr__ (self):
         """
