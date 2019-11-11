@@ -27,7 +27,7 @@ class Round:
         Object representation
 
         """
-        return f'user = {self.user} , comp = {self.comp} , result = {self.comp} , record = {self.record}'
+        return {'user':self.user , 'comp':self.comp , 'result':self.result , 'record':self.record}
 
     def __str__ (self):
         """
