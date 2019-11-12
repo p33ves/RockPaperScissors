@@ -5,7 +5,7 @@ Description : Base round class for Rock-Paper-Scissor
 """
 
 
-class Round:
+class RPS_Round:
     """
     Round Object that includes information about what was played and the streak
 
@@ -24,18 +24,18 @@ class Round:
 
     def __repr__ (self):
         """
-        Object representation
+        Object representation of the round
 
         """
         return {'user':self.user , 'comp':self.comp , 'result':self.result , 'record':self.record}
 
     def __str__ (self):
         """
-        Print the object in readable form for the user
+        Print the Round object in readable form for the user
 
         """
         return  f'''
-        You played {self.display_fullform(self.user)} and computer played {self.display_fullform(self.comp)}. Result being a {self.result.capitalize()}. \n
+        You played {self.display_fullform(self.user)} and computer played {self.display_fullform(self.comp)}. Result being a {self.result.capitalize()}.
         Current record is {self.record['win']} wins - {self.record['loss']} losses - {self.record['tie']} ties '''
 
     def eval (self,user, comp):

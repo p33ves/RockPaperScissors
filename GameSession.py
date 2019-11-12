@@ -8,18 +8,18 @@ import uuid
 import random
 import msvcrt
 from datetime import datetime
-from GameRound import Round
+from GameRound import RPS_Round
 
 
-validInput = set('p','r','s','q')
+validInput = set(['p','r','s','q'])
 
-class Session:
+class RPS_Session:
     """
     Session object contains the unique session details and a list of round objects
     
     """
 
-    def __init__(self, mood, uname = "Peeves"):
+    def __init__(self, uname = "Peeves"):
         """
         Session object Constructor creates a unique session id, gets player mood and start time.
         It logs the details in SessionMaster.log
@@ -33,30 +33,52 @@ class Session:
         self.round_count = 0
         self.rounds = []
         self.play()
-        
 
+    def __repr__ (self):
+        """
+        Object representation of the session
+
+        """
+        return {'session_id':self.sid, 'user':self.uname, 'mood':self.mood, 'start':self.start_dt, 'end':self.end_dt, 'round_count':self.round_count, 'record':self.session_record}
+       
+    def __str__ (self):
+        """
+        Print the Session object in readable form for the user
+
+        """
+        output = f'''
+            Here's your session summary, {self.uname}...
+            You played {self.round_count} games from {self.start_dt} till {self.end_dt}. \n'''
+        if self.round_count:
+            output += " And your record was {self.session_record}. Hope to play you again! "
+        return output
+    
     def play(self):
         """
         Play function accepts the user input until user decides to quit
 
         """       
         while True: 
-            print("Play your choice : ") 
-            userInput = (msvcrt.getch()).lower()        
+            print 
+            userInput = (input("Play your choice : ")).lower()
             if userInput in validInput:
                 if userInput == 'q':
                     self.end_dt = str(datetime.utcnow())
                     if self.round_count > 0:
                         print(f"Thanks for playing, {self.uname} !")
-                        self.session_record = self.rounds[-1].record
-                    print("Exiting now")
+                        self.session_record = self.rounds[-1]['record']
+                    print("Quiting now")
                     return True
                 else:
-                    comp = random.choice(tuple('r','p','s'))
-                    r = Round(userInput, comp)
+                    comp = random.choice(tuple(['r','p','s']))
+                    r = RPS_Round(userInput, comp)
                     self.round_count += 1
-                    self.rounds += r.__repr__()
+                    self.rounds.append(r.__repr__()) 
                     print(r)
             else:
                 print("Play() game input Error !")
                 return False
+
+
+s = RPS_Session()
+print(s)
