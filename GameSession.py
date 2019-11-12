@@ -78,7 +78,3 @@ class RPS_Session:
             else:
                 print("Play() game input Error !")
                 return False
-
-
-s = RPS_Session()
-print(s)
