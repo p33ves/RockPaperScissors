@@ -1,14 +1,15 @@
 """
 Name : GameSession.py
-Description : Base round class for Rock-Paper-Scissor
+Description : Session class for Rock-Paper-Scissor
 
 """
 
+
 import uuid
 import random
-import msvcrt
+import GameRound
+from GameLog import RPS_Log
 from datetime import datetime
-from GameRound import RPS_Round
 
 
 validInput = set(['p','r','s','q'])
@@ -19,7 +20,8 @@ class RPS_Session:
     
     """
 
-    def __init__(self, uname = "Peeves"):
+    @RPS_Log
+    def __init__(self, uname, mood):
         """
         Session object Constructor creates a unique session id, gets player mood and start time.
         It logs the details in SessionMaster.log
@@ -27,12 +29,12 @@ class RPS_Session:
         """
         self.sid = str(uuid.uuid4())
         self.uname = uname
-        print(f"Welcome {uname} !")
-        self.mood = input("How are you feeling today?")  #Get input for user mood from 1 (depressed) to 5 (elated)
+        print(f"Welcome {uname} ! \n Feeling {mood} today?")
+        self.mood = mood  
         self.start_dt = str(datetime.utcnow())
         self.round_count = 0
         self.rounds = []
-        self.play()
+        #self.play()
 
     def __repr__ (self):
         """
@@ -59,7 +61,6 @@ class RPS_Session:
 
         """       
         while True: 
-            print 
             userInput = (input("Play your choice : ")).lower()
             if userInput in validInput:
                 if userInput == 'q':
@@ -67,14 +68,19 @@ class RPS_Session:
                     if self.round_count > 0:
                         print(f"Thanks for playing, {self.uname} !")
                         self.session_record = self.rounds[-1]['record']
-                    print("Quiting now")
+                    else:
+                        print("Quiting without playing")
                     return True
                 else:
                     comp = random.choice(tuple(['r','p','s']))
-                    r = RPS_Round(userInput, comp)
+                    r = GameRound.RPS_Round(userInput, comp)
                     self.round_count += 1
                     self.rounds.append(r.__repr__()) 
                     print(r)
             else:
                 print("Play() game input Error !")
                 return False
+
+uname = input("Please enter your user name:")
+mood = input("How are you feeling today?")    #Get input for user mood from 1 (depressed) to 5 (elated)
+s = RPS_Session(uname,mood)
