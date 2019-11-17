@@ -12,15 +12,17 @@ class RPS_Round:
     """
     record = {'win':0, 'loss':0, 'tie':0}
 
-    def __init__ (self, user, comp):
+    def __init__ (self, session_id, user, comp):
         """
         Round object Constructor accepts input and updates the current record
 
         """
+        self.session_id = session_id
         self.user = user
         self.comp = comp
         self.result = self.eval(user, comp)
         self.record[self.result] += 1
+        
 
     def __repr__ (self):
         """

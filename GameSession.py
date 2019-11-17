@@ -27,7 +27,7 @@ class RPS_Session:
         It logs the details in SessionMaster.log
 
         """
-        self.sid = str(uuid.uuid4())
+        self.session_id = str(uuid.uuid4())
         self.uname = uname
         print(f"Welcome {uname} ! \n Feeling {mood} today?")
         self.mood = mood  
@@ -41,7 +41,7 @@ class RPS_Session:
         Object representation of the session
 
         """
-        return {'session_id':self.sid, 'user':self.uname, 'mood':self.mood, 'start':self.start_dt, 'end':self.end_dt, 'round_count':self.round_count, 'record':self.session_record}
+        return {'session_id':self.session_id, 'user':self.uname, 'mood':self.mood, 'start':self.start_dt, 'end':self.end_dt, 'round_count':self.round_count, 'record':self.session_record}
        
     def __str__ (self):
         """
@@ -73,7 +73,7 @@ class RPS_Session:
                     return True
                 else:
                     comp = random.choice(tuple(['r','p','s']))
-                    r = GameRound.RPS_Round(userInput, comp)
+                    r = GameRound.RPS_Round(self.session_id, userInput, comp)
                     self.round_count += 1
                     self.rounds.append(r.__repr__()) 
                     print(r)
