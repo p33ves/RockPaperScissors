@@ -5,13 +5,15 @@ Description : Base round class for Rock-Paper-Scissor
 """
 
 
+from GameLog import RPS_Log
+
 class RPS_Round:
     """
     Round Object that includes information about what was played and the streak
 
     """
     record = {'win':0, 'loss':0, 'tie':0}
-
+    
     def __init__ (self, session_id, user, comp):
         """
         Round object Constructor accepts input and updates the current record
@@ -23,7 +25,7 @@ class RPS_Round:
         self.result = self.eval(user, comp)
         self.record[self.result] += 1
         
-
+    @RPS_Log                                                                 
     def __repr__ (self):
         """
         Object representation of the round

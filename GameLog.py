@@ -1,10 +1,9 @@
 """
 Name : GameLog.py
-Description : Logger-Decorator class for Rock-Paper-Scissor
+Description : self.logger-Decorator class for Rock-Paper-Scissor
 
 """
 
-import functools
 import logging
 
 class RPS_Log:
@@ -19,19 +18,19 @@ class RPS_Log:
 
         """
         self.function = function
-        self.caller = str(function).split()[1].split('.')[0]
-        if self.caller == "RPS_Session":
-            logger = logging.getLogger(function)
-            logger.setLevel(logging.INFO)
-            formatter = logging.Formatter('%(levelname)s:%(name)s:%(message)s')
-            filehandler = logging.FileHandler('Session_logging.log')
-            filehandler.setFormatter(formatter)
-            logger.addHandler(filehandler)
-            
+        self.caller = str(function).split()[1].split('.')[0]    
 
 
         
 
     def __call__(self, *args):
         print(f"Function is {self.caller} of type {type(self.caller)} Arguments are {args}")
+        self.logger = logging.getLogger(self.caller)
+        self.logger.setLevel(logging.INFO)
+        formatter = logging.Formatter('%(levelname)s:%(asctime)s:%(message)s')
+        log_file = f"Session_{args[0]}.log"
+        filehandler = logging.FileHandler(log_file)                   
+        filehandler.setFormatter(formatter)
+        self.logger.addHandler(filehandler)
+        self.logger.info(str(args))
         return self.function(self, *args)

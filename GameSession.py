@@ -20,7 +20,6 @@ class RPS_Session:
     
     """
 
-    @RPS_Log
     def __init__(self, uname, mood):
         """
         Session object Constructor creates a unique session id, gets player mood and start time.
@@ -34,14 +33,16 @@ class RPS_Session:
         self.start_dt = str(datetime.utcnow())
         self.round_count = 0
         self.rounds = []
-        #self.play()
-
+        self.play()
+    
+    #@RPS_Log                                                                                    Uncomment and use this during DB Session table insertion
     def __repr__ (self):
         """
         Object representation of the session
 
         """
-        return {'session_id':self.session_id, 'user':self.uname, 'mood':self.mood, 'start':self.start_dt, 'end':self.end_dt, 'round_count':self.round_count, 'record':self.session_record}
+        return vars(self)
+        #return {'session_id':self.session_id, 'user':self.uname, 'mood':self.mood, 'start':self.start_dt, 'end':self.end_dt, 'round_count':self.round_count, 'record':self.session_record}
        
     def __str__ (self):
         """
