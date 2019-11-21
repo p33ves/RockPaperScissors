@@ -5,7 +5,9 @@ Description : Base round class for Rock-Paper-Scissor
 """
 
 
-from GameLog import RPS_Log
+import logging
+#r_logger.info(str(args))
+ 
 
 class RPS_Round:
     """
@@ -25,7 +27,7 @@ class RPS_Round:
         self.result = self.eval(user, comp)
         self.record[self.result] += 1
         
-    @RPS_Log                                                                 
+    #@RPS_Log                                                                     
     def __repr__ (self):
         """
         Object representation of the round
