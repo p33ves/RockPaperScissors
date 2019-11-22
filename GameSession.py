@@ -23,6 +23,8 @@ session_logger.addHandler(session_filehandler)
 
 def session_log_decorator(function):
     """
+    Decorator function for the Master session log file
+
     """
     def log_wrapper(obj, *args):
         function(obj, *args)
@@ -58,7 +60,6 @@ class RPS_Session:
         Object representation of the session
 
         """
-        #return vars(self)
         return {'session_id':self.session_id, 'user':self.uname, 'mood':self.mood, 'start':self.start_dt, 'end':self.end_dt, 'round_count':self.round_count, 'record':self.session_record}
        
     def __str__ (self):
@@ -98,6 +99,8 @@ class RPS_Session:
     @session_log_decorator
     def quit(self):
         """
+        Function for graceful exit from the game 
+
         """
         self.end_dt = str(datetime.utcnow())
         if self.round_count > 0:

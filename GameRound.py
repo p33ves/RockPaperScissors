@@ -17,6 +17,8 @@ round_logger.addHandler(round_filehandler)
 
 def round_log_decorator(function):
     """
+    Decorator function for logging the individual sessions
+    
     """
     def log_wrapper(obj, *args):
         function(obj, *args)
