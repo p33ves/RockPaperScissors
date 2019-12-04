@@ -33,7 +33,7 @@ def session_log_decorator(function):
     return log_wrapper
 
 
-class RPS_Session:
+class Game_Session:
     """
     Session object contains the unique session details and a list of round objects
     
@@ -74,6 +74,8 @@ class RPS_Session:
             output += " And your record was {self.session_record}. Hope to play you again! "
         return output
     
+
+class RPS_Session (Game_Session):
     def play(self):
         """
         Play function accepts the user input until user decides to quit
@@ -108,8 +110,6 @@ class RPS_Session:
             self.session_record = self.rounds[-1]['record']
         else:
             print("Quiting without playing")
-
-
 
 uname = input("Please enter your user name:")
 mood = input("How are you feeling today?")    #Get input for user mood from 1 (depressed) to 5 (elated)
